@@ -25,6 +25,7 @@ initialize_system() {
     else
         echo "reports already exists. Skipping."
 fi
+echo "Initialization complete."
 
 }
 

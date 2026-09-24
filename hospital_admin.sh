@@ -11,6 +11,21 @@ initialize_system() {
     else
         echo "active_logs already exists. Skipping."
     fi
+
+    if [ ! -d "archived_logs" ]; then
+        echo "Creating archived_logs directory..."
+        mkdir archived_logs
+    else
+        echo "archived_logs already exists. Skipping."
+    fi
+
+    if [ ! -d "reports" ]; then
+        echo "Creating reports directory..."
+        mkdir reports
+    else
+        echo "reports already exists. Skipping."
+fi
+
 }
 
 initialize_system

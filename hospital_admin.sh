@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#!/bin/bash
+
 
 initialize_system() {
     echo "Initializing KNH Digital Infrastructure..."
@@ -29,4 +29,14 @@ echo "Initialization complete."
 
 }
 
-initialize_system
+# TODO: Member 2 - replace rhis placeholder with the real secure_data()function
+secure_data() {
+     echo "Placeholder: secure_data() not yet added by Member 2."
+     }
+     main() { 
+         initialize_system
+         secure_data
+         echo "System Environment Secured"
+         date
+}
+main

@@ -29,7 +29,7 @@ echo "Initialization complete."
 
 }
 
-# TODO: Member 2 - replace rhis placeholder with the real secure_data()function
+# TODO: Member 2 - replace this placeholder with the real secure_data()function
 secure_data() {
      echo "Placeholder: secure_data() not yet added by Member 2."
      }

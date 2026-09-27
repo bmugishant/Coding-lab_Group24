@@ -1,0 +1,7 @@
+# Runtime-generated directories (created automatically by hospital_admin.sh)
+active_logs/
+archived_logs/
+reports/
+
+# Process ID file created when hospital_system.py is running
+/tmp/hospital_system.pid

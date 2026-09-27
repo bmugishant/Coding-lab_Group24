@@ -41,7 +41,7 @@ water_audit() {
     printf "\n--- WATER USAGE AUDIT ---\n"
     printf "Resource: ICU_WATER_RESERVE\n"
     printf "Average Water Usage: %s\n" "$average"
-    printf "----------\n"
+    printf -- "----------\n"
 }
 
 process_vitals

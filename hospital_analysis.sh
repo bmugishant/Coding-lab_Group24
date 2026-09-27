@@ -26,4 +26,28 @@ process_vitals() {
     echo "Critical alerts appended to $output_file"
 }
 
+water_audit() {
+    local water_usage_file="active_logs/water_usage_log.log"
+
+    if [[ ! -f "$water_usage_file" ]]; then
+        echo "Error: water usage file not found"
+        return 1
+    fi
+
+    local average
+    average=$(awk -F' \| ' '$2 == "ICU_WATER_RESERVE" {sum += $3; count++} END {
+        if (count > 0)
+            printf "%.2f", sum / count
+        else
+            printf "0.00"
+    }' "$water_usage_file")
+    
+    printf "\n--- WATER USAGE AUDIT ---\n"
+    printf "Resource: ICU_WATER_RESERVE\n"
+    printf "Average Water Usage: %s\n" "$average"
+    printf "----------\n"
+}
+
+
 process_vitals
+water_audit

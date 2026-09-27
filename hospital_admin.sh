@@ -29,14 +29,13 @@ echo "Initialization complete."
 
 }
 
-# TODO: Member 2 - replace this placeholder with the real secure_data()function
 secure_data() {
      chmod 700 active_logs
-    echo "Permissions updated for active_logs:"
-    ls -l active_logs
+     echo "Give the owner full permission for the directory active_logs"
+     ls -ld active_logs
+}
 
-     }
-     main() { 
+main() { 
          initialize_system
          secure_data
          echo "System Environment Secured"

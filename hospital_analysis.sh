@@ -3,10 +3,6 @@
 # process_vitals(): scans heart rate and temperature logs in active_logs
 # for CRITICAL entries, extracts Timestamp, Device_ID, Value, and appends
 # them to reports/critical_alerts.txt.
-#
-# ASSUMPTION: logs are space- or comma-separated with columns in order:
-# Timestamp, Device_ID, Value, Status. Confirm the real format once you
-# have a sample line from hospital_system.py, and adjust below if needed.
 
 process_vitals() {
     local heart_rate_log="active_logs/heart_rate_log.log"
@@ -27,26 +23,25 @@ process_vitals() {
 }
 
 water_audit() {
-    local log_file="active_logs/water_usage.log"
+    local water_usage_file="active_logs/water_usage_log.log"
 
-    if [ ! -f "$log_file" ]; then
-        echo "Warning: $log_file not found, skipping."
-        return 0
+    if [[ ! -f "$water_usage_file" ]]; then
+        echo "Error: water usage file not found"
+        return 1
     fi
 
-    awk -F'[, ]+' '
-        $0 ~ /ICU_WATER_RESERVE/ {
-            sum += $3
-            count++
-        }
-        END {
-            if (count > 0) {
-                printf "Average ICU Water Reserve Usage: %.2f liters\n", sum/count
-            } else {
-                print "No ICU_WATER_RESERVE entries found in log."
-            }
-        }
-    ' "$log_file"
+    local average
+    average=$(awk -F' \| ' '$2 == "ICU_WATER_RESERVE" {sum += $3; count++} END {
+        if (count > 0)
+            printf "%.2f", sum / count
+        else
+            printf "0.00"
+    }' "$water_usage_file")
+
+    printf "\n--- WATER USAGE AUDIT ---\n"
+    printf "Resource: ICU_WATER_RESERVE\n"
+    printf "Average Water Usage: %s\n" "$average"
+    printf "----------\n"
 }
 
 process_vitals

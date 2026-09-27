@@ -9,8 +9,8 @@
 # have a sample line from hospital_system.py, and adjust below if needed.
 
 process_vitals() {
-    local heart_rate_log="active_logs/heart_rate.log"
-    local temperature_log="active_logs/temperature.log"
+    local heart_rate_log="active_logs/heart_rate.log.log"
+    local temperature_log="active_logs/temperature.log.log"
     local output_file="reports/critical_alerts.txt"
 
     mkdir -p reports
@@ -18,7 +18,7 @@ process_vitals() {
     for log_file in "$heart_rate_log" "$temperature_log"; do
         if [[ -f "$log_file" ]]; then
             echo "Scanning $log_file for CRITICAL entries..."
-            grep "CRITICAL" "$log_file" | awk -F'[, ]+' '{print $1, $2, $3}' >> "$output_file"
+            grep "CRITICAL" "$log_file" | awk -F' \| ' ' '{print $1, $2, $3}' >> "$output_file"
         else
             echo "Warning: $log_file not found, skipping."
         fi

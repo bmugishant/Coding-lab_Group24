@@ -31,7 +31,10 @@ echo "Initialization complete."
 
 # TODO: Member 2 - replace this placeholder with the real secure_data()function
 secure_data() {
-     echo "Placeholder: secure_data() not yet added by Member 2."
+     chmod 700 active_logs
+    echo "Permissions updated for active_logs:"
+    ls -l active_logs
+
      }
      main() { 
          initialize_system

@@ -23,7 +23,7 @@ archive_logs() {
         mv "$file" "archived_logs/$new_name"
         echo "Archived $filename -> archived_logs/$new_name"
 
-        touch "active_logs/$filename"
+        touch active_logs/heart_rate.log active_logs/temperature.log active_logs/water_usage.log
         echo "Recreated empty active_logs/$filename"
     done
     shopt -u nullglob
